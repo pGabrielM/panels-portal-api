@@ -14,4 +14,4 @@ AppDataSource.initialize().then(() => {
 
   app.use(errorMiddleware)
   return app.listen(port, () => console.log(`Server running at port http://localhost:${port}`))
-})
+}).catch((error) => {return console.log(`Database connection error ocurred:  ${error}`)})
