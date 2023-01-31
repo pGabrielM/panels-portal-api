@@ -12,7 +12,7 @@ export class LoginController {
     const user = await userRepository.findOneBy({ email: email })
 
     if (!user) {
-      throw new BadRequestError('E-mail ou senha invalidos!')
+      throw new UnauthorizedError('E-mail ou senha invalidos!')
     }
 
     const verifyPass = await bcrypt.compare(password, user.password)
