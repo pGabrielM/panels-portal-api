@@ -31,6 +31,10 @@ export class LoginController {
     })
   }
 
+  async logout(req: Request, res: Response) {
+    return res.json('User logged out successfully')
+  } 
+
   async getProfile(req: Request, res: Response) {
     return res.json(req.user)
   }

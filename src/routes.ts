@@ -13,5 +13,6 @@ routes.use(authMiddleware)
 routes.get('/profile', new LoginController().getProfile)
 routes.post('/user', new UserController().create)
 routes.post('/panel', new RegisterPanelsController().storePanel)
+routes.get('/logout', new LoginController().logout)
 
 export default routes
