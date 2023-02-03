@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { BadRequestError } from "../helpers/api-error"
 import { panelRepository } from "../repositories/panelRepository"
-import { LoginController } from "./LoginController"
 
 export class RegisterPanelsController {
   async storePanel(req: Request, res: Response) {
