@@ -6,11 +6,11 @@ export class PanelsLinks {
   id: number
 
   @Column({ type: 'text' })
-  name: string
+  panel_name: string
 
   @Column({ type: 'text', unique: true })
-  link: string
+  panel_link: string
 
   @Column({ type: 'text' })
-  user: string
+  created_by_user: string
 }
