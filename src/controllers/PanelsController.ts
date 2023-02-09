@@ -2,21 +2,30 @@ import { Request, Response } from "express"
 import { BadRequestError } from "../helpers/api-error"
 import { panelRepository } from "../repositories/panelRepository"
 
+export interface CreatePanelProps {
+  panel_name: string
+  link: string
+  status: string
+  order: number
+}
+
 export class PanelsController {
   async storePanel(req: Request, res: Response) {
-    const { panelName, panelLink } = req.body
-    const { name } = req.user
+    const { panel_name, link, status, order }: CreatePanelProps = req.body
+    const { username } = req.user
 
-    const panelExists = await panelRepository.findOneBy({ name: panelName })
+    const panelExists = await panelRepository.findOneBy({ panel_name: panel_name })
 
     if (panelExists) {
       throw new BadRequestError('Painel já cadastrado!')
     }
 
     const newPanel = panelRepository.create({
-      name: panelName,
-      link: panelLink,
-      created_by: name,
+      panel_name: panel_name,
+      link: link,
+      status: status,
+      order: order,
+      created_by: username,
     })
 
     await panelRepository.save(newPanel)
@@ -44,7 +53,7 @@ export class PanelsController {
 
     const panel = await panelRepository.findOneBy({id: id})
     
-    if(panel?.name == data.panel_name) {
+    if(panel?.panel_name == data.panel_name) {
       return res.status(409).json('O mesmo nome não pode ser utilizado!')
     }
     if(panel?.link == data.panel_link) {

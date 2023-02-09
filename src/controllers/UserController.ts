@@ -5,9 +5,9 @@ import bcrypt from 'bcrypt'
 
 export class UserController {
   async create(req: Request, res: Response) {
-    const { name, login, password } = req.body
+    const { name, username, password } = req.body
 
-    const userExists = await userRepository.findOneBy({ login: login })
+    const userExists = await userRepository.findOneBy({ username: username })
 
     if (userExists) {
       throw new BadRequestError('E-mail já cadastrado!')
@@ -17,7 +17,7 @@ export class UserController {
 
     const newUser = userRepository.create({
       name,
-      login,
+      username,
       password: hashPassword,
     })
 

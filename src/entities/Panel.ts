@@ -6,7 +6,7 @@ export class Panel {
   id: number
 
   @Column({ type: 'text' })
-  name: string
+  panel_name: string
 
   @Column({ type: 'text' })
   link: string

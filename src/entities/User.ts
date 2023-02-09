@@ -9,7 +9,7 @@ export class User {
   name: string
 
   @Column({ type: 'text', unique: true })
-  login: string
+  username: string
 
   @Column({ type: 'text' })
   password: string
