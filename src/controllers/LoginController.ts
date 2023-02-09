@@ -6,9 +6,9 @@ import bcrypt from 'bcrypt'
 
 export class LoginController {
   async login(req: Request, res: Response) {
-    const { email, password } = req.body
+    const { login, password } = req.body
 
-    const user = await userRepository.findOneBy({ email: email })
+    const user = await userRepository.findOneBy({ login: login })
 
     if (!user) {
       throw new UnauthorizedError('E-mail ou senha invalidos!')

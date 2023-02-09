@@ -7,16 +7,16 @@ export class PanelsController {
     const { panelName, panelLink } = req.body
     const { name } = req.user
 
-    const panelExists = await panelRepository.findOneBy({ panel_name: panelName })
+    const panelExists = await panelRepository.findOneBy({ name: panelName })
 
     if (panelExists) {
       throw new BadRequestError('Painel já cadastrado!')
     }
 
     const newPanel = panelRepository.create({
-      panel_name: panelName,
-      panel_link: panelLink,
-      created_by_user: name,
+      name: panelName,
+      link: panelLink,
+      created_by: name,
     })
 
     await panelRepository.save(newPanel)
@@ -44,10 +44,10 @@ export class PanelsController {
 
     const panel = await panelRepository.findOneBy({id: id})
     
-    if(panel?.panel_name == data.panel_name) {
+    if(panel?.name == data.panel_name) {
       return res.status(409).json('O mesmo nome não pode ser utilizado!')
     }
-    if(panel?.panel_link == data.panel_link) {
+    if(panel?.link == data.panel_link) {
       return res.status(409).json('O mesmo link não pode ser utilizado!')
     }
 
