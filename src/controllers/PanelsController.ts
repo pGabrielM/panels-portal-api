@@ -24,6 +24,14 @@ export class PanelsController {
     return res.status(201).json(newPanel)
   }
 
+  async getOnePanel(req: Request, res: Response) {
+    const id = Number(req.params.id)
+
+    const panel = await panelRepository.findOneBy({id: id})
+
+    return res.status(201).json(panel)
+  }
+
   async getAllPanel(req: Request, res: Response) {
     const allPanels = await panelRepository.find()
 
