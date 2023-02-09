@@ -1,0 +1,66 @@
+import { Request, Response } from "express"
+import { BadRequestError } from "../helpers/api-error"
+import { panelRepository } from "../repositories/panelRepository"
+
+export class PanelsController {
+  async storePanel(req: Request, res: Response) {
+    const { panelName, panelLink } = req.body
+    const { name } = req.user
+
+    const panelExists = await panelRepository.findOneBy({ panel_name: panelName })
+
+    if (panelExists) {
+      throw new BadRequestError('Painel já cadastrado!')
+    }
+
+    const newPanel = panelRepository.create({
+      panel_name: panelName,
+      panel_link: panelLink,
+      created_by_user: name,
+    })
+
+    await panelRepository.save(newPanel)
+
+    return res.status(201).json(newPanel)
+  }
+
+  async getAllPanel(req: Request, res: Response) {
+    const allPanels = await panelRepository.find()
+
+    return res.status(201).json(allPanels)
+  }
+
+  async updatePanel(req: Request, res: Response) {
+    const id = Number(req.params.id)
+    const data = req.body
+
+    const panel = await panelRepository.findOneBy({id: id})
+    
+    if(panel?.panel_name == data.panel_name) {
+      return res.status(409).json('O mesmo nome não pode ser utilizado!')
+    }
+    if(panel?.panel_link == data.panel_link) {
+      return res.status(409).json('O mesmo link não pode ser utilizado!')
+    }
+
+    const panelToChange = await panelRepository.update(id, data)
+
+    if(panelToChange.affected == 0) {
+      return res.status(400).json('Painel não encontrado!')
+    }
+
+    return res.status(201).json('Painel alterado com sucesso!')
+  }
+
+  async deletePanel(req: Request, res: Response) {
+    const id = req.params.id
+
+    const panelExists = await panelRepository.delete(id)
+
+    if (panelExists.affected == 0) {
+      return res.status(400).json('Painel não encontrado!')
+    }
+
+    return res.status(201).json('Painel excluído com sucesso!')
+  }
+}
