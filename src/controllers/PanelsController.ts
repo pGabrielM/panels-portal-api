@@ -1,9 +1,10 @@
 import { Request, Response } from "express"
+import { Equal, LessThan, Raw } from "typeorm"
 import { BadRequestError } from "../helpers/api-error"
 import { panelRepository } from "../repositories/panelRepository"
 
 export interface CreatePanelProps {
-  panel_name: string
+  panelName: string
   link: string
   status: string
   order: number
@@ -11,17 +12,17 @@ export interface CreatePanelProps {
 
 export class PanelsController {
   async storePanel(req: Request, res: Response) {
-    const { panel_name, link, status, order }: CreatePanelProps = req.body
+    const { panelName, link, status, order }: CreatePanelProps = req.body
     const { username } = req.user
 
-    const panelExists = await panelRepository.findOneBy({ panel_name: panel_name })
+    const panelExists = await panelRepository.findOneBy({panel_name: Equal(panelName)})
 
     if (panelExists) {
       throw new BadRequestError('Painel já cadastrado!')
     }
 
     const newPanel = panelRepository.create({
-      panel_name: panel_name,
+      panel_name: panelName,
       link: link,
       status: status,
       order: order,
