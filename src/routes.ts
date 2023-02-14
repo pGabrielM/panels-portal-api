@@ -7,11 +7,11 @@ import { authMiddleware } from "./middlewares/authMiddleware";
 const routes = Router();
 
 routes.post('/login', new LoginController().login)
+routes.post('/user', new UserController().create)
 
 routes.use(authMiddleware)
 
 routes.get('/profile', new LoginController().getProfile)
-routes.post('/user', new UserController().create)
 routes.get('/panel', new PanelsController().getAllPanel)
 routes.get('/panel/:id', new PanelsController().getOnePanel)
 routes.post('/panel', new PanelsController().storePanel)

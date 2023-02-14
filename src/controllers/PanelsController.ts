@@ -23,9 +23,8 @@ export class PanelsController {
 
     const newPanel = panelRepository.create({
       panel_name: panelName,
-      link: link,
+      panel_link: link,
       status: status,
-      order: order,
       created_by: username,
     })
 
@@ -37,7 +36,7 @@ export class PanelsController {
   async getOnePanel(req: Request, res: Response) {
     const id = Number(req.params.id)
 
-    const panel = await panelRepository.findOneBy({id: id})
+    const panel = await panelRepository.findOneBy({panel_id: id})
 
     return res.status(201).json(panel)
   }
@@ -52,12 +51,12 @@ export class PanelsController {
     const id = Number(req.params.id)
     const data = req.body
 
-    const panel = await panelRepository.findOneBy({id: id})
+    const panel = await panelRepository.findOneBy({panel_id: id})
     
     if(panel?.panel_name == data.panel_name) {
       return res.status(409).json('O mesmo nome não pode ser utilizado!')
     }
-    if(panel?.link == data.panel_link) {
+    if(panel?.panel_link == data.panel_link) {
       return res.status(409).json('O mesmo link não pode ser utilizado!')
     }
 
