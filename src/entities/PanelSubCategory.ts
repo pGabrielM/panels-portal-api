@@ -6,7 +6,7 @@ export class PanelSubCategory {
   subcategory_id: number
 
   @Column({ type: 'text' })
-  name: string
+  subcategory_name: string
 
   @Column({ type: 'int8' })
   order: number

@@ -6,7 +6,7 @@ export class PanelCategory {
   category_id: number
 
   @Column({ type: 'text' })
-  name: string
+  category_name: string
 
   @Column({ type: 'int8' })
   order: number

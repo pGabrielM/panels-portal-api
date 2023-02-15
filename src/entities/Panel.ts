@@ -14,13 +14,13 @@ export class Panel {
   @Column({ type: 'int8' })
   order: number
 
-  @Column({ type: 'int8' })
+  @Column({ type: 'int8', nullable: true })
   sector_id: string
 
-  @Column({ type: 'int8' })
+  @Column({ type: 'int8', nullable: true })
   category_id: string
 
-  @Column({ type: 'int8' })
+  @Column({ type: 'int8', nullable: true })
   subcategory_id: string
 
   @Column({ type: 'text' })
