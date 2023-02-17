@@ -6,7 +6,7 @@ export class PanelSector {
   sector_id: number
 
   @Column({ type: 'text' })
-  name: string
+  sector_name: string
 
   @Column({ type: 'int8' })
   order: number
