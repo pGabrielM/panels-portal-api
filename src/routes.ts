@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { CategoryController } from "./controllers/CategoryController";
 import { LoginController } from "./controllers/LoginController";
 import { PanelsController } from "./controllers/PanelsController";
 import { UserController } from "./controllers/UserController";
@@ -18,5 +19,6 @@ routes.post('/panel', new PanelsController().storePanel)
 routes.delete('/panel/:id', new PanelsController().deletePanel)
 routes.patch('/panel/:id', new PanelsController().updatePanel)
 routes.get('/logout', new LoginController().logout)
+routes.post('/category', new CategoryController().storeRamification)
 
 export default routes
