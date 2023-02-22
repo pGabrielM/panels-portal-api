@@ -19,6 +19,9 @@ routes.post('/panel', new PanelsController().storePanel)
 routes.delete('/panel/:id', new PanelsController().deletePanel)
 routes.patch('/panel/:id', new PanelsController().updatePanel)
 routes.get('/logout', new LoginController().logout)
+
+routes.get('/sector', new CategoryController().getAllSector)
 routes.post('/category', new CategoryController().storeRamification)
+routes.get('/category', new CategoryController().getAllCategory)
 
 export default routes

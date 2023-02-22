@@ -74,4 +74,16 @@ export class CategoryController {
       return res.status(201).json(newSubCategory)
     }
   }
+
+  async getAllSector(req: Request, res: Response) {
+    const allSectors = await panelSectorRepository.find()
+
+    return res.status(201).json(allSectors)
+  }
+
+  async getAllCategory(req: Request, res: Response) {
+    const allCategories = await panelCategoryRepository.find()
+
+    return res.status(201).json(allCategories)
+  }
 }
