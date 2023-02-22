@@ -1,8 +1,7 @@
 import { Request, Response } from "express"
-import { Equal, LessThan, Raw } from "typeorm"
+import { Equal } from "typeorm"
 import { BadRequestError } from "../helpers/api-error"
 import { panelCategoryRepository } from "../repositories/panelCategoryRepository"
-import { panelRepository } from "../repositories/panelRepository"
 import { panelSectorRepository } from "../repositories/panelSectorRepository"
 import { panelSubCategoryRepository } from "../repositories/panelSubCategoryRepository"
 
