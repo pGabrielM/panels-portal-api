@@ -8,6 +8,7 @@
   "scripts": {
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
+    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts",
     "dev": "nodemon"
   },
   "dependencies": {
@@ -21,7 +22,8 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.11",
+    "typeorm-extension": "^2.8.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
